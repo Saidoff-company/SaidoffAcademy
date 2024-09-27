@@ -39,12 +39,28 @@ class WhyUs(BaseModel):
         verbose_name_plural = _('WhyUs')
 
 
+
+class Course(BaseModel):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='courses/')
+
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('course')
+        verbose_name_plural = _('courses')
+
+
 class CoursePlan(BaseModel):
     course_duration_time = models.CharField(max_length=100)
     theory_duration_time = models.CharField(max_length=100)
     theory_text = models.TextField(_("practical_text"))
     practical_duration_time = models.CharField(max_length=100)
     practical_text = models.TextField(_("practical_text"))
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='courses')
 
     def __str__(self):
         return self.course_duration_time
@@ -68,6 +84,7 @@ class ModuleLesson(BaseModel):
 class CourseModule(BaseModel):
     text = models.CharField(_("practical_text"), max_length=250)
     lesson = models.ForeignKey(ModuleLesson, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
@@ -91,26 +108,11 @@ class CourseMentor(BaseModel):
     projects_involved = models.TextField()
     disciple = models.TextField()
     place_of_work = models.ForeignKey(PlaceOfWork, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("course mentor")
         verbose_name_plural = _("course mentors")
-
-
-class Course(BaseModel):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    image = models.ImageField(upload_to='courses/')
-    course_plan = models.ForeignKey(CoursePlan, on_delete=models.CASCADE)
-    course_module = models.ForeignKey(CourseModule, on_delete=models.CASCADE)
-    course_mentor = models.ForeignKey(CourseMentor, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = _('course')
-        verbose_name_plural = _('courses')
 
 
 class UserContactApplication(BaseModel):
@@ -127,23 +129,10 @@ class UserContactApplication(BaseModel):
         verbose_name_plural = _('user contact applications')
 
 
-class OurProgramInfo(BaseModel):
-    order = models.IntegerField(default=1)
-    text = models.TextField()
-
-    def __str__(self):
-        return self.text
-
-    class Meta:
-        verbose_name = _('Our program info')
-        verbose_name_plural = _('Our program infos')
-
-
 class OurProgram(BaseModel):
     image = models.ImageField(upload_to="programs/")
     title = models.CharField(max_length=100)
     description = models.TextField()
-    program_info = models.ForeignKey(OurProgramInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -151,6 +140,19 @@ class OurProgram(BaseModel):
     class Meta:
         verbose_name = _('our program')
         verbose_name_plural = _('our programs')
+
+
+class OurProgramInfo(BaseModel):
+    order = models.IntegerField(default=1)
+    text = models.TextField()
+    program = models.ForeignKey(OurProgram, on_delete=models.CASCADE, related_name='our_program_infos')
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = _('Our program info')
+        verbose_name_plural = _('Our program infos')
 
 
 class StudentFeedback(BaseModel):
@@ -206,6 +208,7 @@ class Computer(BaseModel):
     CPU = models.CharField(max_length=100)
     GPU = models.CharField(max_length=100)
     display = models.CharField(max_length=100)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.processor
