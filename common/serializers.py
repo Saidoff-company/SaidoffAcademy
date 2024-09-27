@@ -70,5 +70,51 @@ class OurProgramInfoSerializer(serializers.ModelSerializer):
         model = models.OurProgram
         fields = ['id', 'title', 'program_info']
 
-#
-# class CoursePlanSerializer(serializers.ModelSerializer)
+
+class CoursePlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CoursePlan
+        fields = ['course_duration_time', 'theory_duration_time', 'theory_text', 'practical_duration_time', 'practical_text']
+
+
+class PlaceOfWorkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PlaceOfWork
+        fields = ['id', 'logo']
+
+
+class CourseMentorSerializer(serializers.ModelSerializer):
+    place_of_work = PlaceOfWorkSerializer(many=True, source='places')
+
+    class Meta:
+        model = models.CourseMentor
+        fields = ['image', 'experience', 'projects_involved', 'disciple', 'place_of_work']
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ModuleLesson
+        fields = ['text', 'course_module']
+
+
+class CourseModuleSerializer(serializers.ModelSerializer):
+    lesson = LessonSerializer(source='modules', many=True)
+
+    class Meta:
+        model = models.CourseModule
+        fields = ['id', 'text', 'lesson']
+
+
+class ComputerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Computer
+        fields = ['processor', 'CPU', 'GPU', 'display',]
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    course_mentor = CourseMentorSerializer(read_only=True)
+    course_plan = CoursePlanSerializer(read_only=True)
+
+    class Meta:
+        model = models.Course
+        fields = ['title', 'description', 'image', 'course_mentor', 'course_plan']

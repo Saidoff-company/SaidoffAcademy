@@ -12,5 +12,5 @@ urlpatterns = [
     path('contact/', views.UserContactApplicationCreateAPIView.as_view(), name='contact'),
     path('faq/', views.FAQListApiView.as_view(), name='faq'),
     path('our-program-info/<int:id>/', views.OurProgramDetailApiView.as_view(), name='our-program-info'),
-
+    path('course/<int:id>/', views.CourseDetailApiView.as_view(), name='course'),
 ]
