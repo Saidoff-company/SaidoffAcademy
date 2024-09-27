@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from common.validatorsfile import *
-from django.core.validators import RegexValidator, URLValidator
 
 
 class BaseModel(models.Model):
@@ -15,10 +14,10 @@ class BaseModel(models.Model):
 class Company(BaseModel):
     phone = models.CharField(max_length=20, validators=[phone_validator])
     location_text = models.CharField(max_length=255)
-    facebook = models.URLField(validators=[URLValidator(), facebook_validator])
-    linkedin = models.URLField([URLValidator(), linkedin_validator])
-    instagram = models.URLField([URLValidator(), instagram_validator])
-    telegram = models.URLField([URLValidator(), telegram_validator])
+    facebook = models.URLField(validators=[facebook_validator])
+    linkedin = models.URLField(validators=[linkedin_validator])
+    instagram = models.URLField(validators=[instagram_validator])
+    telegram = models.URLField(validators=[telegram_validator])
 
     def __str__(self):
         return self.phone
