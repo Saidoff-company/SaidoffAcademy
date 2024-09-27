@@ -63,3 +63,28 @@ class OurProgramDetailApiView(generics.RetrieveAPIView):
         program_serializer = serializers.ProgramInfoSerializer(program_info, many=True)
         serializer = self.serializer_class(program)
         return Response(serializer.data)
+
+
+class CourseDetailApiView(generics.RetrieveAPIView):
+    serializer_class = serializers.CourseSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get('id')
+        course = models.Course.objects.get(id=id)
+        course_plan = models.CoursePlan.objects.get(course=course)
+        course_mentor = models.CourseMentor.objects.get(course=course)
+        course_module = models.CourseModule.objects.filter(course=course)
+        computer = models.Computer.objects.get(course=course)
+        computer_serializer = serializers.ComputerSerializer(computer)
+        course_module_serializer = serializers.CourseModuleSerializer(course_module, many=True)
+        course_mentor_serializer = serializers.CourseMentorSerializer(course_mentor)
+        course_plan_serializer = serializers.CoursePlanSerializer(course_plan)
+        course_serializer = serializers.CourseSerializer(course)
+        data = {
+            'course': course_serializer.data,
+            'course_plan': course_plan_serializer.data,
+            'course_mentor': course_mentor_serializer.data,
+            'course_module': course_module_serializer.data,
+            'computer': computer_serializer.data,
+        }
+        return Response(data)

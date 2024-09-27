@@ -39,12 +39,10 @@ class WhyUs(BaseModel):
         verbose_name_plural = _('WhyUs')
 
 
-
 class Course(BaseModel):
     title = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='courses/')
-
 
     def __str__(self):
         return self.title
@@ -70,20 +68,8 @@ class CoursePlan(BaseModel):
         verbose_name_plural = _("course plans")
 
 
-class ModuleLesson(BaseModel):
-    text = models.CharField(_("practical_text"), max_length=250)
-
-    def __str__(self):
-        return self.text
-
-    class Meta:
-        verbose_name = _("module lesson")
-        verbose_name_plural = _("module lessons")
-
-
 class CourseModule(BaseModel):
     text = models.CharField(_("practical_text"), max_length=250)
-    lesson = models.ForeignKey(ModuleLesson, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -94,12 +80,16 @@ class CourseModule(BaseModel):
         verbose_name_plural = _("course modules")
 
 
-class PlaceOfWork(BaseModel):
-    logo = models.ImageField(upload_to="logos/")
+class ModuleLesson(BaseModel):
+    text = models.CharField(_("practical_text"), max_length=250)
+    course_module = models.ForeignKey(CourseModule, on_delete=models.CASCADE, related_name='modules')
+
+    def __str__(self):
+        return self.text
 
     class Meta:
-        verbose_name = _("place of work")
-        verbose_name_plural = _("places of work")
+        verbose_name = _("module lesson")
+        verbose_name_plural = _("module lessons")
 
 
 class CourseMentor(BaseModel):
@@ -107,12 +97,21 @@ class CourseMentor(BaseModel):
     experience = models.TextField(_("experience"))
     projects_involved = models.TextField()
     disciple = models.TextField()
-    place_of_work = models.ForeignKey(PlaceOfWork, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
+        unique_together = ['course', 'id']
         verbose_name = _("course mentor")
         verbose_name_plural = _("course mentors")
+
+
+class PlaceOfWork(BaseModel):
+    logo = models.ImageField(upload_to="logos/")
+    course_mentor = models.ForeignKey(CourseMentor, on_delete=models.CASCADE, related_name='places')
+
+    class Meta:
+        verbose_name = _("place of work")
+        verbose_name_plural = _("places of work")
 
 
 class UserContactApplication(BaseModel):
