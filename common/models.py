@@ -57,7 +57,7 @@ class Course(BaseModel):
 class CoursePlan(BaseModel):
     course_duration_time = models.CharField(max_length=100)
     theory_duration_time = models.CharField(max_length=100)
-    theory_text = models.TextField(_("practical_text"))
+    theory_text = models.TextField(_("theory_text"))
     practical_duration_time = models.CharField(max_length=100)
     practical_text = models.TextField(_("practical_text"))
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='courses')
@@ -97,7 +97,7 @@ class ModuleLesson(BaseModel):
 class CourseMentor(BaseModel):
     image = models.ImageField(upload_to="course_mentor/%Y/%m/%d")
     experience = models.TextField(_("experience"))
-    projects_involved = models.TextField()
+    projects_involved = models.TextField(_("projects_involved"))
     disciple = models.TextField(_("disciple"))
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
