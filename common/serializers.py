@@ -48,7 +48,7 @@ class TeamSerializer(serializers.ModelSerializer):
 class UserContactApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserContactApplication
-        fields = ['phone', 'name', 'course']
+        fields = ['id', 'phone', 'name', 'course']
 
 
 class FAQSerializer(serializers.ModelSerializer):
@@ -74,7 +74,7 @@ class OurProgramInfoSerializer(serializers.ModelSerializer):
 class CoursePlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CoursePlan
-        fields = ['course_duration_time', 'theory_duration_time', 'theory_text', 'practical_duration_time', 'practical_text']
+        fields = ['id', 'course_duration_time', 'theory_duration_time', 'theory_text', 'practical_duration_time', 'practical_text']
 
 
 class PlaceOfWorkSerializer(serializers.ModelSerializer):
@@ -88,13 +88,13 @@ class CourseMentorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.CourseMentor
-        fields = ['image', 'experience', 'projects_involved', 'disciple', 'place_of_work']
+        fields = ['id', 'image', 'experience', 'projects_involved', 'disciple', 'place_of_work']
 
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ModuleLesson
-        fields = ['text', 'course_module']
+        fields = ['id', 'text', 'course_module']
 
 
 class CourseModuleSerializer(serializers.ModelSerializer):
@@ -108,7 +108,7 @@ class CourseModuleSerializer(serializers.ModelSerializer):
 class ComputerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Computer
-        fields = ['processor', 'CPU', 'GPU', 'display',]
+        fields = ['id', 'processor', 'CPU', 'GPU', 'display',]
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -117,4 +117,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Course
-        fields = ['title', 'description', 'image', 'course_mentor', 'course_plan']
+        fields = ['id', 'title', 'description', 'image', 'course_mentor', 'course_plan']

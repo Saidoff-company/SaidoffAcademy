@@ -69,7 +69,7 @@ class CoursePlan(BaseModel):
 
 
 class CourseModule(BaseModel):
-    text = models.CharField(_("practical_text"), max_length=250)
+    text = models.CharField(max_length=250)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -81,7 +81,7 @@ class CourseModule(BaseModel):
 
 
 class ModuleLesson(BaseModel):
-    text = models.CharField(_("practical_text"), max_length=250)
+    text = models.CharField(max_length=250)
     course_module = models.ForeignKey(CourseModule, on_delete=models.CASCADE, related_name='modules')
 
     def __str__(self):
@@ -171,6 +171,9 @@ class StudentFeedback(BaseModel):
 class Partner(BaseModel):
     image = models.ImageField(upload_to="partners/")
     link = models.URLField()
+
+    def __str__(self):
+        return self.image.name
 
     class Meta:
         verbose_name = _("partner")
