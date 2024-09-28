@@ -59,10 +59,16 @@ class OurProgramDetailApiView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         id = kwargs.get('id')
         program = models.OurProgram.objects.get(id=id)
+        programs = models.OurProgram.objects.exclude(id=id)
+        programs_serializer = serializers.OurProgramSerializer(programs, many=True)
         program_info = models.OurProgramInfo.objects.filter(program=program)
         program_serializer = serializers.ProgramInfoSerializer(program_info, many=True)
         serializer = self.serializer_class(program)
-        return Response(serializer.data)
+        data = {
+            'program': serializer.data,
+            'programs': [programs_serializer.data],
+        }
+        return Response(data)
 
 
 class CourseDetailApiView(generics.RetrieveAPIView):

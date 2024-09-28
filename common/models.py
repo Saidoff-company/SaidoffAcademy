@@ -173,6 +173,9 @@ class Partner(BaseModel):
     image = models.ImageField(upload_to="partners/")
     link = models.URLField()
 
+    def __str__(self):
+        return self.image.name
+
     class Meta:
         verbose_name = _("partner")
         verbose_name_plural = _("partners")
