@@ -32,12 +32,6 @@ class ModuleLessonTranslationOptions(TranslationOptions):
 class CourseMentorTranslationOptions(TranslationOptions):
     fields = ('experience', 'projects_involved', 'disciple')
 
-
-@register(models.UserContactApplication)
-class UserContactApplicationTranslationOptions(TranslationOptions):
-    fields = ('name',)
-
-
 @register(models.OurProgram)
 class OurProgramTranslationOptions(TranslationOptions):
     fields = ('title', 'description')
@@ -61,8 +55,3 @@ class TeamTranslationOptions(TranslationOptions):
 @register(models.FAQ)
 class FAQTranslationOptions(TranslationOptions):
     fields = ('question', 'answer')
-
-
-@register(models.Computer)
-class ComputerTranslationOptions(TranslationOptions):
-    fields = ('processor', 'CPU', 'GPU', 'display')
