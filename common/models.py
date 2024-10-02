@@ -11,22 +11,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Company(BaseModel):
-    phone = models.CharField(max_length=20, validators=[phone_validator])
-    location_text = models.CharField(max_length=255)
-    facebook = models.URLField(validators=[facebook_validator])
-    linkedin = models.URLField(validators=[linkedin_validator])
-    instagram = models.URLField(validators=[instagram_validator])
-    telegram = models.URLField(validators=[telegram_validator])
-
-    def __str__(self):
-        return self.phone
-
-    class Meta:
-        verbose_name = _('Company')
-        verbose_name_plural = _('Companies')
-
-
 class WhyUs(BaseModel):
     image = models.ImageField(upload_to='images/')
     title = models.CharField(_("title"), max_length=255)
@@ -185,6 +169,7 @@ class Team(BaseModel):
     full_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="teams/")
     job = models.CharField(_("job"), max_length=100)
+    task = models.CharField(max_length=255)
 
     class Meta:
         verbose_name = _("team")

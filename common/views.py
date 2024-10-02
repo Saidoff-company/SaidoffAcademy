@@ -2,15 +2,6 @@ from rest_framework import views, generics, status
 from rest_framework.response import Response
 
 from common import models, serializers
-from common.models import Company
-
-
-class CompanyApiView(generics.GenericAPIView):
-    serializer_class = serializers.CompanySerializer
-
-    def get(self, request, *args, **kwargs):
-        serializer = self.serializer_class(Company.objects.all().first())
-        return Response(serializer.data)
 
 
 class WhyUsApiView(generics.ListAPIView):

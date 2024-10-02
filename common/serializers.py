@@ -3,22 +3,16 @@ from rest_framework import serializers
 from common import models
 
 
-class CompanySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Company
-        fields = '__all__'
-
-
 class WhyUsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.WhyUs
-        fields = ['id', 'image', 'title', 'description']
+        fields = ['id', 'image', 'title_uz', 'title_ru', 'description_uz', 'description_ru']
 
 
 class CourseListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Course
-        fields = ['id', 'title', 'description', 'image']
+        fields = ['id', 'title_uz', 'title_ru', 'description_uz', 'description_ru', 'image']
 
 
 class PartnerSerializer(serializers.ModelSerializer):
@@ -30,7 +24,7 @@ class PartnerSerializer(serializers.ModelSerializer):
 class OurProgramSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.OurProgram
-        fields = ['id', 'image', 'title', 'description']
+        fields = ['id', 'image', 'title_uz', 'title_ru', 'description_uz', 'description_ru']
 
 
 class StudentFeedbackSerializer(serializers.ModelSerializer):
@@ -68,13 +62,13 @@ class OurProgramInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.OurProgram
-        fields = ['id', 'title', 'program_info']
+        fields = ['id', 'title_uz', 'title_ru', 'program_info']
 
 
 class CoursePlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CoursePlan
-        fields = ['id', 'course_duration_time', 'theory_duration_time', 'theory_text', 'practical_duration_time', 'practical_text']
+        fields = ['id', 'course_duration_time', 'theory_duration_time', 'theory_text_uz', 'theory_text_ru', 'practical_duration_time', 'practical_text_uz', 'practical_text_ru']
 
 
 class PlaceOfWorkSerializer(serializers.ModelSerializer):
@@ -88,13 +82,13 @@ class CourseMentorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.CourseMentor
-        fields = ['id', 'image', 'experience', 'projects_involved', 'disciple', 'place_of_work']
+        fields = ['id', 'image', 'experience_uz', 'experience_ru', 'projects_involved_uz', 'projects_involved_ru', 'disciple_uz', 'disciple_ru', 'place_of_work']
 
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ModuleLesson
-        fields = ['id', 'text', 'course_module']
+        fields = ['id', 'text_uz', 'text_ru', 'course_module']
 
 
 class CourseModuleSerializer(serializers.ModelSerializer):
@@ -102,7 +96,7 @@ class CourseModuleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.CourseModule
-        fields = ['id', 'text', 'lesson']
+        fields = ['id', 'text_uz', 'text_ru', 'lesson']
 
 
 class ComputerSerializer(serializers.ModelSerializer):

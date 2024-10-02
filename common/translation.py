@@ -33,11 +33,6 @@ class CourseMentorTranslationOptions(TranslationOptions):
     fields = ('experience', 'projects_involved', 'disciple')
 
 
-@register(models.UserContactApplication)
-class UserContactApplicationTranslationOptions(TranslationOptions):
-    fields = ('name',)
-
-
 @register(models.OurProgram)
 class OurProgramTranslationOptions(TranslationOptions):
     fields = ('title', 'description')

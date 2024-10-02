@@ -5,17 +5,6 @@ from common import models
 from modeltranslation.admin import TranslationAdmin
 
 
-@admin.register(models.Company)
-class CompanyAdmin(admin.ModelAdmin):
-    def has_add_permission(self, request):
-        if models.Company.objects.count() == 0:
-            return True
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-
 @admin.register(models.WhyUs)
 class WhyUsAdmin(TranslationAdmin):
     list_display = ['id', 'title']
@@ -170,5 +159,5 @@ class TeamAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.FAQ)
-class FAQAdmin(admin.ModelAdmin):
+class FAQAdmin(TranslationAdmin):
     list_display = ['id', 'question']
