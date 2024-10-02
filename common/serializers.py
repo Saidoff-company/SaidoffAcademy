@@ -36,7 +36,7 @@ class StudentFeedbackSerializer(serializers.ModelSerializer):
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Team
-        fields = ['id', 'image', 'job', 'full_name']
+        fields = ['id', 'image', 'job', 'full_name', 'task']
 
 
 class UserContactApplicationSerializer(serializers.ModelSerializer):
