@@ -45,12 +45,12 @@ class OurProgramInfoTranslationOptions(TranslationOptions):
 
 @register(models.StudentFeedback)
 class StudentFeedbackTranslationOptions(TranslationOptions):
-    fields = ('text', 'course_name')
+    fields = ('text', 'course_name', 'full_name')
 
 
 @register(models.Team)
 class TeamTranslationOptions(TranslationOptions):
-    fields = ('job',)
+    fields = ('job', 'full_name')
 
 
 @register(models.FAQ)

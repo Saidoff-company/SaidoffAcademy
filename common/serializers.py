@@ -30,13 +30,13 @@ class OurProgramSerializer(serializers.ModelSerializer):
 class StudentFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StudentFeedback
-        fields = ['id', 'full_name', 'text', 'image', 'course_name']
+        fields = ['id', 'full_name_uz', 'full_name_ru', 'text_uz', 'text_ru', 'image', 'course_name_uz', 'course_name_ru']
 
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Team
-        fields = ['id', 'image', 'job', 'full_name', 'task']
+        fields = ['id', 'image', 'job_uz', 'job_ru', 'full_name_uz', 'full_name_ru','task']
 
 
 class UserContactApplicationSerializer(serializers.ModelSerializer):
@@ -48,7 +48,7 @@ class UserContactApplicationSerializer(serializers.ModelSerializer):
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FAQ
-        fields = ['id', 'question', 'answer']
+        fields = ['id', 'question_uz', 'question_ru', 'answer_uz', 'answer_ru']
 
 
 class ProgramInfoSerializer(serializers.ModelSerializer):
