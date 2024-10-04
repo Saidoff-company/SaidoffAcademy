@@ -33,7 +33,7 @@ class PlaceOfWorkAdmin(admin.ModelAdmin):
         return False
 
 
-class PlaceOfWorkInline(TranslationStackedInline):
+class PlaceOfWorkInline(admin.StackedInline):
     model = models.PlaceOfWork
     extra = 0
 
