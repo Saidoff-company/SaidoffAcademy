@@ -105,10 +105,17 @@ class ComputerSerializer(serializers.ModelSerializer):
         fields = ['id', 'processor', 'CPU', 'GPU', 'display',]
 
 
+class WhoFieldForSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.WhoFieldFor
+        fields = ['id', 'title_uz', 'title_ru', 'description_uz', 'description_ru']
+
+
 class CourseSerializer(serializers.ModelSerializer):
     course_mentor = CourseMentorSerializer(read_only=True)
     course_plan = CoursePlanSerializer(read_only=True)
+    who_field_for = WhoFieldForSerializer(read_only=True, many=True)
 
     class Meta:
         model = models.Course
-        fields = ['id', 'title', 'description', 'image', 'course_mentor', 'course_plan']
+        fields = ['id', 'title', 'description', 'image', 'course_mentor', 'course_plan', 'who_field_for']

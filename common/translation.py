@@ -61,3 +61,9 @@ class FAQTranslationOptions(TranslationOptions):
 @register(models.Computer)
 class ComputerTranslationOptions(TranslationOptions):
     fields = ('processor', 'CPU', 'GPU', 'display')
+
+
+@register(models.WhoFieldFor)
+class WhoFieldForTranslationOptions(TranslationOptions):
+    fields = ('title', 'description')
+

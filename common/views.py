@@ -68,14 +68,16 @@ class CourseDetailApiView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         id = kwargs.get('id')
         course = models.Course.objects.get(id=id)
-        course_plan = models.CoursePlan.objects.get(course=course)
-        course_mentor = models.CourseMentor.objects.get(course=course)
+        course_plan = models.CoursePlan.objects.filter(course=course).first()
+        course_mentor = models.CourseMentor.objects.filter(course=course).first()
         course_module = models.CourseModule.objects.filter(course=course)
-        computer = models.Computer.objects.get(course=course)
+        computer = models.Computer.objects.filter(course=course).first()
+        who_field_for = models.WhoFieldFor.objects.filter(course=course)
         computer_serializer = serializers.ComputerSerializer(computer)
         course_module_serializer = serializers.CourseModuleSerializer(course_module, many=True)
         course_mentor_serializer = serializers.CourseMentorSerializer(course_mentor)
         course_plan_serializer = serializers.CoursePlanSerializer(course_plan)
+        who_field_for_serializer = serializers.WhoFieldForSerializer(who_field_for, many=True)
         course_serializer = serializers.CourseSerializer(course)
         data = {
             'course': course_serializer.data,
@@ -83,5 +85,6 @@ class CourseDetailApiView(generics.RetrieveAPIView):
             'course_mentor': course_mentor_serializer.data,
             'course_module': course_module_serializer.data,
             'computer': computer_serializer.data,
+            'who_field_for': who_field_for_serializer.data,
         }
         return Response(data)

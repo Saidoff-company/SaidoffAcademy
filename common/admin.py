@@ -106,13 +106,6 @@ class ComputerInline(admin.StackedInline):
     extra = 0
 
 
-@admin.register(models.Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title']
-    list_display_links = list_display
-    inlines = [CoursePlanInline, CourseMentorInline, CourseModuleInline, ComputerInline]
-
-
 @admin.register(models.OurProgramInfo)
 class OurProgramInfoAdmin(admin.ModelAdmin):
     def has_module_permission(self, request):
@@ -161,3 +154,21 @@ class TeamAdmin(admin.ModelAdmin):
 @admin.register(models.FAQ)
 class FAQAdmin(TranslationAdmin):
     list_display = ['id', 'question']
+
+
+@admin.register(models.WhoFieldFor)
+class WhoFieldFor(TranslationAdmin):
+    def has_module_permission(self, request):
+        return False
+
+
+class WhoFieldForInline(admin.StackedInline):
+    model = models.WhoFieldFor
+    extra = 0
+
+
+@admin.register(models.Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title']
+    list_display_links = list_display
+    inlines = [CoursePlanInline, CourseMentorInline, CourseModuleInline, ComputerInline, WhoFieldForInline]

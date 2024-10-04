@@ -204,3 +204,16 @@ class Computer(BaseModel):
     class Meta:
         verbose_name = _("computer")
         verbose_name_plural = _("computers")
+
+
+class WhoFieldFor(BaseModel):
+    title = models.CharField(max_length=250)
+    description = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='who_fields_for')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _("who field for")
+        verbose_name_plural = _("who field for")
