@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from common import models
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline, TranslationStackedInline
 
 
 @admin.register(models.WhyUs)
@@ -20,7 +20,7 @@ class CoursePlanAdmin(admin.ModelAdmin):
         return False
 
 
-class CoursePlanInline(admin.StackedInline):
+class CoursePlanInline(TranslationStackedInline):
     model = models.CoursePlan
     extra = 0
 
@@ -33,7 +33,7 @@ class PlaceOfWorkAdmin(admin.ModelAdmin):
         return False
 
 
-class PlaceOfWorkInline(admin.StackedInline):
+class PlaceOfWorkInline(TranslationStackedInline):
     model = models.PlaceOfWork
     extra = 0
 
@@ -47,7 +47,7 @@ class CourseMentorAdmin(admin.ModelAdmin):
         return False
 
 
-class CourseMentorInline(admin.StackedInline):
+class CourseMentorInline(TranslationStackedInline):
     model = models.CourseMentor
     extra = 0
     fields = ['link', 'image', 'experience', 'projects_involved', 'disciple']
@@ -67,7 +67,7 @@ class ModuleLessonAdmin(admin.ModelAdmin):
         return False
 
 
-class ModuleLessonInline(admin.TabularInline):
+class ModuleLessonInline(TranslationTabularInline):
     model = models.ModuleLesson
     extra = 0
 
@@ -82,7 +82,7 @@ class CourseModuleAdmin(admin.ModelAdmin):
         return False
 
 
-class CourseModuleInline(admin.TabularInline):
+class CourseModuleInline(TranslationTabularInline):
     model = models.CourseModule
     extra = 0
     fields = ['link', 'text']
@@ -101,7 +101,7 @@ class ComputerAdmin(admin.ModelAdmin):
         return False
 
 
-class ComputerInline(admin.StackedInline):
+class ComputerInline(TranslationStackedInline):
     model = models.Computer
     extra = 0
 
@@ -112,7 +112,7 @@ class OurProgramInfoAdmin(admin.ModelAdmin):
         return False
 
 
-class OurProgramInfoInline(admin.StackedInline):
+class OurProgramInfoInline(TranslationStackedInline):
     model = models.OurProgramInfo
     extra = 0
     fields = ['link', 'order', 'text']
@@ -162,7 +162,7 @@ class WhoFieldFor(TranslationAdmin):
         return False
 
 
-class WhoFieldForInline(admin.StackedInline):
+class WhoFieldForInline(TranslationStackedInline):
     model = models.WhoFieldFor
     extra = 0
 
